@@ -1,50 +1,57 @@
-<form (ngSubmit)="onSubmit()">
+
+<form [formGroup]="compteForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label>
-        Nom : 
-        <input type="text" class="form-control" placeholder="Entrez votre nom" [(ngModel)]="user.Name" name="name" ngModel required>
-    </label>
+      <label>
+          Nom
+          <input type="text" appNoNumberValidator class="form-control" formControlName="name" placeholder="Entrez votre nom" >
+      </label>
+      <div *ngIf="name.invalid && name.errors.number">
+        <p class="has-error">Votre nom ne peut pas contenu de numéro.</p>
+      </div>
   </div>
-   <div class="form-group">
-    <label>
-        Prénom
-        <input type="text" class="form-control" placeholder="Entrez votre prénom" [(ngModel)]="user.Surname" required>
-    </label>
+  <div class="form-group">
+      <label>
+          Prénom
+          <input type="text" appNoNumberValidator class="form-control" formControlName="surname"  placeholder="Entrez votre prénom" >
+      </label>
+       <div *ngIf="surname.invalid && surname.errors.number">
+        <p class="has-error">Votre prénom ne peut pas contenu de numéro.</p>
+      </div>
   </div>
   <div class="form-group">
       <label>
           Adresse
-          <input type="text" class="form-control" placeholder="Entrez votre adresse" [(ngModel)]="user.Address" required>
+          <input type="text" class="form-control" formControlName="address"  placeholder="Entrez votre adresse" >
       </label>
   </div>
   <div class="form-group">
       <label>
           Code postal
-          <input type="text" class="form-control" placeholder="Entrez votre code postal" [(ngModel)]="user.PostalCode" required>
+          <input type="text" class="form-control" formControlName="postalCode"  placeholder="Entrez votre code postal" >
       </label>
   </div>
   <div class="form-group">
       <label>
             Ville
-          <input type="text" class="form-control" placeholder="Entrez votre ville" [(ngModel)]="user.City" required>
+          <input type="text" appNoNumberValidator class="form-control" formControlName="city"  placeholder="Entrez votre ville" >
       </label>
   </div>
   <div class="form-group">
       <label>
           Téléphone Mobile
-          <input type="tel" class="form-control" placeholder="Entrez votre numéro de téléphone mobile" [(ngModel)]="user.MobilePhone" required>
+          <input type="tel" class="form-control" formControlName="mobilePhone"  placeholder="Entrez votre numéro de téléphone mobile"  >
       </label>
   </div>
   <div class="form-group">
       <label>
           Adresse E-mail
-          <input type="email" class="form-control" placeholder="Entrez votre adresse e-mail" [(ngModel)]="user.Mail" required>
+          <input type="email"  class="form-control" formControlName="mail"  placeholder="Entrez votre adresse e-mail" >
       </label>
   </div>
   <div class="form-group">
       <label>
           Civilité
-          <select class="form-control">
+          <select class="form-control" formControlName="gender" >
               <option value>Monsieur</option>
               <option value>Madame</option>
           </select>
@@ -53,28 +60,30 @@
   <div class="form-group">
     <label>
       Pays
-      <input type="text" class="form-control" placeholder="Entrez votre pays" [(ngModel)]="user.City" required>
+      <input type="text" appNoNumberValidator class="form-control" formControlName="country" placeholder="Entrez votre pays">
     </label>
   </div>
   <div class="form-group">
       <label>
           Identifiant
-          <input type="text" class="form-control" placeholder="Entrez votre identifiant" [(ngModel)]="user.Login" required>
+          <input type="text" class="form-control" formControlName="login"  placeholder="Entrez votre identifiant" >
       </label>
   </div>
   <div class="form-group">
       <label>
           Mot de passe
-          <input type="password"  id="pass" class="form-control" 
-          [(ngModel)]="user.Password" required>
+          <input type="password"  id="pass" formControlName="password"  class="form-control" >
       </label>
   </div>
   <div class="form-group" >
       <label>
           Confirmation du mot de passe
-          <input type="password" id="passConfirm" class="form-control" required [(ngModel)]="user.PasswordConfirm">
+          <input type="password" id="passConfirm" formControlName="passwordConfirm"  class="form-control" >
       </label>
   </div>
-  <button type="submit" class="btn btn-primary">Envoyer le formulaire</button>
 
+
+  <button type="submit"  class="btn btn-primary" [disabled]="!compteForm.valid">Submit</button>
+
+  <button (click)="test()">test</button>
 </form>

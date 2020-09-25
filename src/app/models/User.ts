@@ -7,6 +7,7 @@ export class User{
   MobilePhone: string;
   Mail: string;
   Country: string;
+  Gender: string;
   Login : string;
   Password: string;
   PasswordConfirm: string;
