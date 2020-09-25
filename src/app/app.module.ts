@@ -12,8 +12,8 @@ import { CustomValidatorModule } from './modules/customValidatorModule';
 import { MatchDirective } from './directives/Match.directive';
 
 @NgModule({
-  imports:   [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CustomValidatorModule, MatchDirective],
-  declarations: [ AppComponent, HeaderComponent, FooterComponent, CompteFormComponent, RecapComponent],
+  imports:   [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CustomValidatorModule],
+  declarations: [ AppComponent, HeaderComponent, FooterComponent, CompteFormComponent, RecapComponent, MatchDirective],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
