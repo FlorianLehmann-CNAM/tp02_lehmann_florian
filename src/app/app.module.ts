@@ -9,10 +9,11 @@ import { CompteFormComponent } from './components/compte-form/compte-form.compon
 import { RecapComponent } from './components/recap/recap.component';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorModule } from './modules/customValidatorModule';
+import { MatchDirective } from './directives/Match.directive';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CustomValidatorModule],
-  declarations: [ AppComponent, HeaderComponent, FooterComponent, CompteFormComponent, RecapComponent ],
+  imports:   [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CustomValidatorModule, MatchDirective],
+  declarations: [ AppComponent, HeaderComponent, FooterComponent, CompteFormComponent, RecapComponent],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

@@ -1,9 +1,9 @@
 
 <form [formGroup]="compteForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
+  <div class="form-group" >
       <label>
           Nom
-          <input type="text"  class="form-control" formControlName="name" placeholder="Entrez votre nom" >
+          <input  type="text"  class="form-control" formControlName="name" placeholder="Entrez votre nom" >
       </label>
       <div *ngIf="name.invalid && name.errors.number">
         <p class="has-error">Votre nom ne peut pas contenir de numéro.</p>
@@ -94,12 +94,10 @@
   <div class="form-group" >
       <label>
           Confirmation du mot de passe
-          <input type="password" id="passConfirm" formControlName="passwordConfirm"  class="form-control" >
+          <input type="password" *appMatch="password" id="passConfirm" formControlName="passwordConfirm"  class="form-control" >
       </label>
   </div>
 
 
   <button type="submit"  class="btn btn-primary" [disabled]="!compteForm.valid">Submit</button>
-
-  <button (click)="test()">test</button>
 </form>

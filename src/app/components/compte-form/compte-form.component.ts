@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { User } from '../../models/User';
 
 @Component({
@@ -15,7 +15,7 @@ export class CompteFormComponent implements OnInit {
     name : ['', [Validators.required, this.noNumberValidator]],
     surname: ['', [Validators.required, this.noNumberValidator]],
     address: ['', [Validators.required]],
-    postalCode: ['', [Validators.required, Validators.maxLength(5)]],
+    postalCode: ['', [Validators.required, this.postalCodeValidator]],
     city: ['', [Validators.required, this.noNumberValidator]],
     mobilePhone: ['', [Validators.required, this.phoneValidator]],
     mail : ['', [Validators.required, this.emailValidator]],
@@ -49,14 +49,10 @@ export class CompteFormComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  test(){
-    console.log(this.compteForm.value);
-  }
   
 
   // validators
-  noNumberValidator(control: AbstractControl){
+  noNumberValidator(control: AbstractControl) : ValidationErrors{
     const reg : RegExp = /[0-9]/
     if(!control.value)
       return null;
@@ -64,7 +60,7 @@ export class CompteFormComponent implements OnInit {
     return !reg.test(control.value) ? null : ({'number': true});
   }
 
-  emailValidator(control: AbstractControl){
+  emailValidator(control: AbstractControl) : ValidationErrors{
     const reg : RegExp = /[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+/
      
     if(!control.value)
@@ -73,12 +69,20 @@ export class CompteFormComponent implements OnInit {
     return reg.test(control.value) ? null : ({'notAnEmailAddress': true});
   }
 
-  phoneValidator(control: AbstractControl){
+  phoneValidator(control: AbstractControl) : ValidationErrors{
     const reg : RegExp = /[0-9]{10}/
     if(!control.value)
       return null;
     
     return reg.test(control.value) ? null : ({'notPhone' : true});
     
+  }
+
+  postalCodeValidator(control: AbstractControl){
+    const reg : RegExp = /[0-9]{5}/
+    if(!control.value)
+      return null;
+
+    return reg.test(control.value) ? null : ({'notPostalCode' : true});
   }
 }
