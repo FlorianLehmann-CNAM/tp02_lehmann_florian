@@ -94,7 +94,7 @@
   <div class="form-group" >
       <label>
           Confirmation du mot de passe
-          <input type="password" *appMatch="password" id="passConfirm" formControlName="passwordConfirm"  class="form-control" >
+          <input type="password" appMatch [valueToConfirm]="password.value" id="passConfirm" formControlName="passwordConfirm"  class="form-control" >
       </label>
   </div>
 

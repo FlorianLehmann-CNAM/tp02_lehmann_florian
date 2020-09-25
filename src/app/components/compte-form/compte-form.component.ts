@@ -23,7 +23,7 @@ export class CompteFormComponent implements OnInit {
     gender: [''],
     login: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    passwordConfirm: ['', [Validators.required]]
+    passwordConfirm: ['', [Validators.required, thpasswordValidator]]
   })
 
   constructor(private fb : FormBuilder) { }
@@ -42,6 +42,7 @@ export class CompteFormComponent implements OnInit {
   get passwordConfirm() {return this.compteForm.get('passwordConfirm');}
 
   onSubmit() : void{
+    
     let user : User = new User(this.name.value, this.surname.value, this.address.value, this.postalCode.value, this.city.value, this.mobilePhone.value, this.mail.value, this.country.value, this.gender.value, this.login.value, this.password.value);
 
     this.onFormSubmit.emit(user);
@@ -84,5 +85,12 @@ export class CompteFormComponent implements OnInit {
       return null;
 
     return reg.test(control.value) ? null : ({'notPostalCode' : true});
+  }
+
+  passwordValidator(control: AbstractControl){
+    if(!control.value)
+      return null;
+
+    return control.value === this.password.value ? null : ({'invalid': true});
   }
 }
