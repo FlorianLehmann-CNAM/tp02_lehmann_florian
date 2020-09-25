@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/User';
+
 @Component({
   selector: 'app-compte-form',
   templateUrl: './compte-form.component.html',
@@ -8,25 +9,24 @@ import { User } from '../../models/User';
 })
 export class CompteFormComponent implements OnInit {
 
+  @Output() onFormSubmit = new EventEmitter<User>();
+
   compteForm : FormGroup = this.fb.group({
-    name : ['qsd', [Validators.required]],
-    surname: ['qsd', [Validators.required]],
-    address: ['qsd', [Validators.required]],
-    postalCode: ['qsd', [Validators.required, Validators.maxLength(5)]],
-    city: ['qsd', [Validators.required]],
-    mobilePhone: ['qsd', [Validators.required]],
-    mail : ['qsd', [Validators.required]],
-    country: ['qsd', [Validators.required]],
+    name : ['', [Validators.required, this.noNumberValidator]],
+    surname: ['', [Validators.required, this.noNumberValidator]],
+    address: ['', [Validators.required]],
+    postalCode: ['', [Validators.required, Validators.maxLength(5)]],
+    city: ['', [Validators.required, this.noNumberValidator]],
+    mobilePhone: ['', [Validators.required, this.phoneValidator]],
+    mail : ['', [Validators.required, this.emailValidator]],
+    country: ['', [Validators.required, this.noNumberValidator]],
     gender: [''],
-    login: ['qsd', [Validators.required]],
-    password: ['qsd', [Validators.required]],
-    passwordConfirm: ['qsd', [Validators.required]]
+    login: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    passwordConfirm: ['', [Validators.required]]
   })
 
-  constructor(private fb : FormBuilder) {
-    
-    
-  }
+  constructor(private fb : FormBuilder) { }
 
   get name() {return this.compteForm.get('name'); }
   get surname() { return this.compteForm.get('surname');}
@@ -42,7 +42,9 @@ export class CompteFormComponent implements OnInit {
   get passwordConfirm() {return this.compteForm.get('passwordConfirm');}
 
   onSubmit() : void{
+    let user : User = new User(this.name.value, this.surname.value, this.address.value, this.postalCode.value, this.city.value, this.mobilePhone.value, this.mail.value, this.country.value, this.gender.value, this.login.value, this.password.value);
 
+    this.onFormSubmit.emit(user);
   }
 
   ngOnInit() {
@@ -53,4 +55,30 @@ export class CompteFormComponent implements OnInit {
   }
   
 
+  // validators
+  noNumberValidator(control: AbstractControl){
+    const reg : RegExp = /[0-9]/
+    if(!control.value)
+      return null;
+
+    return !reg.test(control.value) ? null : ({'number': true});
+  }
+
+  emailValidator(control: AbstractControl){
+    const reg : RegExp = /[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+/
+     
+    if(!control.value)
+      return null;
+
+    return reg.test(control.value) ? null : ({'notAnEmailAddress': true});
+  }
+
+  phoneValidator(control: AbstractControl){
+    const reg : RegExp = /[0-9]{10}/
+    if(!control.value)
+      return null;
+    
+    return reg.test(control.value) ? null : ({'notPhone' : true});
+    
+  }
 }

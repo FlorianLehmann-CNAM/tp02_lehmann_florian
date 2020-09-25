@@ -2,3 +2,7 @@ form{
   text-align:center;
   margin: 10px;
 }
+
+.has-error{
+  color: red;
+}

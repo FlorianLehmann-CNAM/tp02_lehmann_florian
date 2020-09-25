@@ -10,9 +10,19 @@ export class User{
   Gender: string;
   Login : string;
   Password: string;
-  PasswordConfirm: string;
 
-  constructor(){
+  constructor(name: string, surname: string, address: string, postalcode: string, city: string, mobilephone: string, mail: string, country: string, gender: string, login: string, password: string){
 
+    this.Name = name;
+    this.Surname = surname;
+    this.Address = address;
+    this.PostalCode = postalcode;
+    this.City = city;
+    this.MobilePhone = mobilephone;
+    this.Mail = mail;
+    this.Country = country;
+    this.Gender = gender;
+    this.Login = login;
+    this.Password = password;
   }
 }
