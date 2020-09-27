@@ -7,7 +7,6 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class FormatPhonePipe implements PipeTransform{
   transform(value: any) : string {
 
-
     let output : string = "";
     if(value.charAt(0) === '0')
       output = "+33" + value.substring(1);
@@ -18,7 +17,6 @@ export class FormatPhonePipe implements PipeTransform{
     else
       output = "+33"
     
-    console.log("pipe: ", output);
 
     return output;
 

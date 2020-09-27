@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<app-compte-form></app-compte-form>
+<app-compte-form (onUserChanged)="onUserChanged($event)"></app-compte-form>
 
-<app-recap></app-recap>
+<app-recap [user]="user"></app-recap>
 
 <app-footer></app-footer>

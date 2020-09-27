@@ -64,9 +64,10 @@
   <div class="form-group">
       <label>
           Civilité
-          <select class="form-control" formControlName="gender" >
-              <option value>Monsieur</option>
-              <option value>Madame</option>
+          <select class="form-control" formControlName="gender">
+              <option *ngFor="let value of genderOptions" [ngValue]="value">
+                {{value}}
+              </option>             
           </select>
       </label>
   </div>
@@ -98,6 +99,5 @@
       </label>
   </div>
 
-  <button (click)="test()">test</button>
   <button type="submit"  class="btn btn-primary" [disabled]="!compteForm.valid">Submit</button>
 </form>

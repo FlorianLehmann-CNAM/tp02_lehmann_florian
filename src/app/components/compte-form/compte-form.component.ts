@@ -9,20 +9,32 @@ import { User } from '../../models/User';
 })
 export class CompteFormComponent implements OnInit {
 
-  @Output() onFormSubmit = new EventEmitter<User>();
+  @Output('onUserChanged') onFormSubmit = new EventEmitter<User>();
+
+
+  passwordValidator = (control: AbstractControl) : ValidationErrors => {
+    if(!control.value)
+      return null;
+
+    if(!this.password)
+      return null;
+    return control.value === this.password.value ? null : ({'invalid': true});
+  }
+
+  genderOptions = ['Monsieur', 'Madame'];
 
   compteForm : FormGroup = this.fb.group({
-    name : ['', [Validators.required, this.noNumberValidator]],
-    surname: ['', [Validators.required, this.noNumberValidator]],
-    address: ['', [Validators.required]],
-    postalCode: ['', [Validators.required, this.postalCodeValidator]],
-    city: ['', [Validators.required, this.noNumberValidator]],
-    mobilePhone: ['', [Validators.required, this.phoneValidator]],
-    mail : ['', [Validators.required, this.emailValidator]],
-    country: ['', [Validators.required, this.noNumberValidator]],
-    gender: [''],
-    login: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    name : ['qsd', [Validators.required, this.noNumberValidator]],
+    surname: ['qsd', [Validators.required, this.noNumberValidator]],
+    address: ['qsd', [Validators.required]],
+    postalCode: ['67130', [Validators.required, this.postalCodeValidator]],
+    city: ['qsd', [Validators.required, this.noNumberValidator]],
+    mobilePhone: ['+33649150933', [Validators.required, this.phoneValidator]],
+    mail : ['q@q.qsq', [Validators.required, this.emailValidator]],
+    country: ['qsd', [Validators.required, this.noNumberValidator]],
+    gender: [this.genderOptions[0]],
+    login: ['qsdd', [Validators.required]],
+    password: ['qsd', [Validators.required]],
     passwordConfirm: ['', [Validators.required, this.passwordValidator]]
   })
 
@@ -81,7 +93,7 @@ export class CompteFormComponent implements OnInit {
     
   }
 
-  postalCodeValidator(control: AbstractControl){
+  postalCodeValidator(control: AbstractControl) : ValidationErrors{
     const reg : RegExp = /[0-9]{5}/
     if(!control.value)
       return null;
@@ -89,10 +101,8 @@ export class CompteFormComponent implements OnInit {
     return reg.test(control.value) ? null : ({'notPostalCode' : true});
   }
 
-  passwordValidator(control: AbstractControl){
-    if(!control.value)
-      return null;
-
-    return control.value === this.password.value ? null : ({'invalid': true});
+  onGenderChanged(event : any) : void{
+    console.log("changed");
+    this.gender.setValue(event.target.value);
   }
 }
