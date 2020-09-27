@@ -10,10 +10,11 @@ import { RecapComponent } from './components/recap/recap.component';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorModule } from './modules/customValidatorModule';
 import { MatchDirective } from './directives/Match.directive';
+import { FormatPhonePipe } from './pipes/formatPhone.pipe';
 
 @NgModule({
   imports:   [BrowserModule, FormsModule, ReactiveFormsModule, CommonModule, CustomValidatorModule],
-  declarations: [ AppComponent, HeaderComponent, FooterComponent, CompteFormComponent, RecapComponent, MatchDirective],
+  declarations: [ AppComponent, HeaderComponent, FooterComponent, CompteFormComponent, RecapComponent, MatchDirective,  FormatPhonePipe],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

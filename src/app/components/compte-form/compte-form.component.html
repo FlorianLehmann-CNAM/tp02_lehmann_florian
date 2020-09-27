@@ -46,7 +46,7 @@
   <div class="form-group">
       <label>
           Téléphone Mobile
-          <input type="tel" class="form-control" formControlName="mobilePhone"  placeholder="Entrez votre numéro de téléphone mobile"  >
+          <input type="tel" class="form-control" formControlName="mobilePhone"  placeholder="Entrez votre numéro de téléphone mobile" [value]="mobilePhone | formatPhone" >
       </label>
       <div *ngIf="mobilePhone.invalid && mobilePhone.errors.notPhone">
         <p class="has-error">Le numéro de téléphone renseigné est invalide.</p>
