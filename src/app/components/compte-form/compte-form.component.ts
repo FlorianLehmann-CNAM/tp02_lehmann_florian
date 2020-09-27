@@ -23,7 +23,7 @@ export class CompteFormComponent implements OnInit {
     gender: [''],
     login: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    passwordConfirm: ['', [Validators.required, thpasswordValidator]]
+    passwordConfirm: ['', [Validators.required, this.passwordValidator]]
   })
 
   constructor(private fb : FormBuilder) { }
@@ -51,7 +51,9 @@ export class CompteFormComponent implements OnInit {
   ngOnInit() {
   }
   
-
+  test(){
+    console.log(this.compteForm.value);
+  }
   // validators
   noNumberValidator(control: AbstractControl) : ValidationErrors{
     const reg : RegExp = /[0-9]/
@@ -71,7 +73,7 @@ export class CompteFormComponent implements OnInit {
   }
 
   phoneValidator(control: AbstractControl) : ValidationErrors{
-    const reg : RegExp = /[0-9]{10}/
+    const reg : RegExp = /[0-9]{11}/ // 11: +33 6
     if(!control.value)
       return null;
     
